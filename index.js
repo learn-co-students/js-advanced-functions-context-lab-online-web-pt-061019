@@ -1,5 +1,61 @@
 /* Your Code Here */
 
+function createEmployeeRecord(employee) {
+    return {
+        firstName: employee[0],  
+        familyName:employee[1],
+        title: employee[2],
+        payPerHour: employee[3],
+        timeInEvents: [],
+        timeOutEvents: []
+    }
+}
+
+function createEmployeeRecords(employeeArrays) {
+    return employeeArrays.map(employee => createEmployeeRecord(employee))
+}
+
+function createTimeInEvent(timeInStamp) {
+    let [date, time] = timeInStamp.split(' ')
+    this.timeInEvents.push({
+        type: "TimeIn",
+        hour: parseInt(time, 10),
+        date: date
+    })
+    return this
+}
+
+function createTimeOutEvent(timeOutStamp) {
+    let [date, time] = timeOutStamp.split(' ')
+    this.timeOutEvents.push({
+        type: "TimeOut",
+        hour: parseInt(time, 10),
+        date: date
+    })
+    return this
+}
+
+function hoursWorkedOnDate(date) {
+    let timeIn = this.timeInEvents.find(el => el.date === date)
+    let timeOut = this.timeOutEvents.find(el => el.date === date)
+    let hoursWorkedTotal = (timeOut.hour - timeIn.hour) / 100
+    return hoursWorkedTotal 
+}
+
+function wagesEarnedOnDate(date) {
+    return hoursWorkedOnDate.call(this, date) * this.payPerHour
+}
+
+
+function calculatePayroll(employeeArrays) {
+    let payroll = employeeArrays.reduce((total, employee) => total + allWagesFor.call(employee), 0)
+    return payroll
+}
+
+function findEmployeeByFirstName(employeeArrays, firstName) {
+    return employeeArrays.find( employee => employee.firstName === firstName )
+}
+
 /*
  We're giving you this function. Take a look at it, you might see some usage
  that's new and different. That's because we're avoiding a well-known, but
