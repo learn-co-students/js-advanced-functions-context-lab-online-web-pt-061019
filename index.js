@@ -46,11 +46,11 @@ function createTimeInEvent(dateStamp){
     return (outEvent.hour-inEvent.hour)/100
  };
 
-//  function wagesEarnedOnDate(date){
-//     let wage = employeeRecord.payPerHour
-//     let pay = hoursWorkedOnDate(employeeRecord, date) * wage
-//     return pay
-//  }
+ function wagesEarnedOnDate(date){
+    let wage = this.payPerHour
+    let pay = hoursWorkedOnDate.call(this, date) * wage
+    return pay
+ }
 
  function findEmployeeByFirstName(employeeRecords, firstName){
     let employee = employeeRecords.find(function(record){
@@ -59,11 +59,11 @@ function createTimeInEvent(dateStamp){
     return employee
 }
 
-// function calculatePayroll(employeeRecords){
-//    return employeeRecords.reduce(function(memo, employee){
-//        return memo + allWagesFor(employee)
-//    } ,0)
-// }
+function calculatePayroll(employeeRecords){
+   return employeeRecords.reduce(function(memo, employee){
+       return memo + allWagesFor.call(employee)
+   } ,0)
+}
  
 /*
  We're giving you this function. Take a look at it, you might see some usage
