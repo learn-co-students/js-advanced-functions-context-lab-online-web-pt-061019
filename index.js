@@ -1,5 +1,62 @@
 /* Your Code Here */
 
+function createEmployeeRecord(employee) {
+  return {
+    firstName: employee[0],
+    familyName: employee[1],
+    title: employee[2],
+    payPerHour: employee[3],
+    timeInEvents: [],
+    timeOutEvents: []
+  }
+}
+
+function createEmployeeRecords(employees) {
+  return employees.map(employee => createEmployeeRecord(employee))
+}
+
+function createTimeInEvent(timeIn) {
+  let [date, hour] = timeIn.split(' ')
+
+  this.timeInEvents.push({
+    type: "TimeIn",
+    hour: parseInt(hour),
+    date: date
+  })
+  return this
+}
+
+function createTimeOutEvent(timeOut) {
+  let [date, time] = timeOut.split(' ')
+
+  this.timeOutEvents.push({
+    type: "TimeOut",
+    hour: parseInt(time, 10),
+    date: date
+  })
+  return this
+}
+
+function hoursWorkedOnDate(date) {
+  const timeIn = this.timeInEvents.find(workday => workday.date === date)
+  const timeOut = this.timeOutEvents.find(workday => workday.date === date)
+
+  return (timeOut.hour - timeIn.hour) / 100
+}
+
+function wagesEarnedOnDate(date) {
+  return hoursWorkedOnDate.call(this, date) * this.payPerHour
+}
+
+function findEmployeeByFirstName(srcArray, firstName) {
+   return srcArray.find(employee => employee.firstName === firstName)
+}
+
+function calculatePayroll(records) {
+  let sum = records.map(record => allWagesFor.call(record))
+  return sum.reduce((num, sum) => num + sum)
+}
+
 /*
  We're giving you this function. Take a look at it, you might see some usage
  that's new and different. That's because we're avoiding a well-known, but
